@@ -132,16 +132,19 @@ var(gryph.PHE$RS.G) / var(gryph.PHE$RS) # 0.1
 
 summary(gryph.PHE)
 
+# Add the sex of each gryphon
+gryph.PHE$sex <- "NA"
+gryph.PHE$sex <- gryphons[match(gryphons$id, gryph.PHE$animal), "sex"]
+
+gryph.PHE$sex <- as.factor(gryph.PHE$sex)
+
 # Keep only the created dataset
 
-Old.object <-ls()
+gryph.data <- gryph.PHE[,c("animal","sire","dam","sex","cohort","MASS","WING","RS")]
+names(gryph.data) <- c("animal","sire","dam","sex","cohort","mass","wing","rs")
 
-gryph.data <- gryph.PHE[,c("animal","sire","dam","cohort","MASS","WING","RS")]
-names(gryph.data) <- c("animal","sire","dam","cohort","mass","wing","rs")
-
-rm(list=Old.object)
-rm(Old.object)
+rm(cohort_effects, covENV, covGEN, gryph.PHE, gryph.PHE.bi,gryphons, h2.MASS, h2.RS, h2.WING, hCOH.MASS,hMAT.MASS,maternal_effects,ra,re,VP.MASS, VP.RS,VP.WING, x.MASS, x.WING,x.RS)
 
 summary(gryph.data)
 
-# To do : add repeated values
+# To do : add repeated values, add different mean depending on the sex of each gryphon.
